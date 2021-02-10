@@ -19,7 +19,7 @@ from tensorflow.keras.models import Sequential
 
 input = "input"
 
-data = pd.read_excel(os.path.join(input , "hf.xlsx"))
+data = pd.read_excel(os.path.join(input ,"hf.xlsx"))
 
 data.replace({
     2015 : 0,

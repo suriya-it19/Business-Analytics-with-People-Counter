@@ -1,6 +1,12 @@
+import os
+from random import randrange
+
+import joblib
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import streamlit as st
+import streamlit.components.v1 as components
 
 from mylib.Run import run
 
@@ -15,7 +21,7 @@ final_price_model_path = 'models/final_price/'
 final_rating_model_path = 'models/final_rating/'
 final_sold_model_path = 'models/final_sold/'
     
-price = joblib.load(cost_price_model_path + 'price.pkl')
+price = joblib.load(cost_price_model_path+ 'price.pkl')
 
 chettinad_mutton_price = joblib.load(final_price_model_path + 'chettinad_mutton_price.pkl')
 chicken_curry_price = joblib.load(final_price_model_path + 'chicken_curry_price .pkl')
