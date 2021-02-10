@@ -1,8 +1,8 @@
 #===============================================================================
 """ Optional features config. """
 #===============================================================================
-PROTOTXT = 'People_counter_with_analytics/mobilenet_ssd/MobileNetSSD_deploy.prototxt'
-MODEL = 'People_counter_with_analytics/mobilenet_ssd/MobileNetSSD_deploy.caffemodel'
+PROTOTXT = 'mobilenet_ssd/MobileNetSSD_deploy.prototxt'
+MODEL = 'mobilenet_ssd/MobileNetSSD_deploy.caffemodel'
 
 Skip_frames = 30
 Confidence = 0.4
