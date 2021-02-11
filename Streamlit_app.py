@@ -7,7 +7,7 @@ from mylib import config
 
 st.set_page_config(layout="wide")
 
-st.title('Analytics')
+st.title('Enterprice AI')
 """
 # Business Analysis of Restautant's profit
 """

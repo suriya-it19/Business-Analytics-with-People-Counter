@@ -29,7 +29,7 @@ def first(mod):
 
             st.table(df)#,width = 10000)
 
-    table()
+    #table()
     if st.button('Specify URL and Click here'):
         if mod == 'Yolo' or 'yolo' or 'YOLO':
                     box.run()

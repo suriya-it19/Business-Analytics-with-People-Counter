@@ -55,8 +55,12 @@ mutton_chops_plates = joblib.load(final_sold_model_path + 'mutton_chops_plates.p
 paneer_tikka_plates = joblib.load(final_sold_model_path + 'paneer_tikka_plates.pkl')
 prawn_fry_plates = joblib.load(final_sold_model_path + 'prawn_fry_plates.pkl')
 veg_manchurian_plates = joblib.load(final_sold_model_path + 'veg_manchurian_plates.pkl')
+dish_price = ['chettinad_mutton_price', 'chicken_curry_price', 'chicken_nuggets_price', 'dhal_makni_price', 'mutton_chops_price', 'paneer_tikka_price', 'prawn_fry_price', 'veg_manchurian_price']
+dish_rating = ['chettinad_mutton_rating', 'chicken_curry_rating', 'chicken_nuggets_rating', 'dhal_makni_rating', 'mutton_chops_rating', 'paneer_tikka_rating', 'prawn_fry_rating', 'veg_manchurian_rating']
+dish_sold = ['chettinad_mutton_sold', 'chicken_curry_sold', 'chicken_nuggets_sold', 'dhal_makni_sold', 'mutton_chops_sold', 'paneer_tikka_sold', 'prawn_fry_sold', 'veg_manchurian_sold']
 
 def run():
+    o = 0
     t0 = time.time()
 
     CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
@@ -86,8 +90,8 @@ def run():
         """
         [INFO] Starting the video..
         """
-        vs = VideoStream(input_video).start()        
-        #vs = cv2.VideoCapture(input_video)
+        #vs = VideoStream(input_video).start()        
+        vs = cv2.VideoCapture(input_video)
 
     image_placeholder = st.empty()
 
@@ -112,7 +116,7 @@ def run():
         if config.url1 or config.url2 is None and frame is None:
             break
 
-        frame = imutils.resize(frame, width = 500)
+        frame = imutils.resize(frame, width = 700)
         rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         if W is None or H is None:
@@ -149,22 +153,25 @@ def run():
             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
 
         image_placeholder.image(frame, channels="BGR")
+        o += 1
 
         def table():
             week = 1
             month = 1
             year = 5#randrange(5)
+            z,b = randrange(7), randrange(7)
             date = f'{month}/2021'
 
             df = pd.DataFrame({
                 'Date': f'{date}',
                 'Week': f'{week}',
                 'Price': price.predict([[year, month, week]]),
-                'chettinad_mutton_plates' : chettinad_mutton_plates.predict([[year, month, week]]),
-                'chettinad_mutton_rating' : chettinad_mutton_rating.predict([[year, month, week]]),
-                'chettinad_mutton_price' : chettinad_mutton_price.predict([[year, month, week]])
+                f'{dish_sold[z]}' : chettinad_mutton_plates.predict([[year, month, week]]),
+                f'{dish_rating[b]}' : chettinad_mutton_rating.predict([[year, month, week]]),
+                f'{dish_price[z]}' : chettinad_mutton_price.predict([[year, month, week]])
             }, index=[0])
 
             st.table(df)#,width = 10000)
-        
-        table()
+            
+        if o % 60 ==0:
+            table()
