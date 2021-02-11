@@ -66,13 +66,13 @@ def table():
     date = f'{month}/2021'
 
     #while week <= 4 and month <= 12:
-    for (i, (k, v)) in enumerate(run.info2):
-        if v > 100:
-            Price_data = price.predict([[year, month, week]]) + 5000
-        elif v > 50:
-            Price_data = price.predict([[year, month, week]]) + 1000
-        elif v > 20:
-            Price_data = price.predict([[year, month, week]]) + 600
+    #for (i, (k, v)) in enumerate(run.info2):
+    #    if v > 100:
+    #        Price_data = price.predict([[year, month, week]]) + 5000
+    #    elif v > 50:
+    #        Price_data = price.predict([[year, month, week]]) + 1000
+    #    elif v > 20:
+    #        Price_data = price.predict([[year, month, week]]) + 600
         
 
 
@@ -80,7 +80,7 @@ def table():
     df = pd.DataFrame({
 'Date': f'{date}',
 'Week': f'{week}',
-'Price': Price_data,
+'Price': price.predict([[year, month, week]]),
 'chettinad_mutton_plates' : chettinad_mutton_plates.predict([[year, month, week]]),
 'chettinad_mutton_rating' : chettinad_mutton_rating.predict([[year, month, week]]),
 'chettinad_mutton_price' : chettinad_mutton_price.predict([[year, month, week]]),
