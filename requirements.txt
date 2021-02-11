@@ -22,3 +22,4 @@ sklearn
 tensorflow
 keras
 matplotlib
+cmake
