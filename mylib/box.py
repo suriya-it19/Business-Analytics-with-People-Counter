@@ -157,10 +157,10 @@ def run():
 
         def table():
             week = 1
-            month = 1
+            month = randrange(3)
             year = 5#randrange(5)
             z,b = randrange(7), randrange(7)
-            date = f'{month}/2021'
+            date = '1/2021'
 
             df = pd.DataFrame({
                 'Date': f'{date}',
