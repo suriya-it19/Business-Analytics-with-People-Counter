@@ -5,11 +5,17 @@ import pandas as pd
 import streamlit as st
 
 from mylib import Run
+from mylib import box
 
-def first():
+def first(mod):
     """
     # Using People Counter and Machine learning
     """
-    if st.button('Start People Counting?'):
-        Run.run()
+    if st.button('Specify URL and Click here'):
+        if mod == 'Yolo' or 'yolo' or 'YOLO':
+                    box.run()
+
+        elif mod == 'SSD' or 'Ssd' or 'ssd':
+                    Run.run()
+
 
