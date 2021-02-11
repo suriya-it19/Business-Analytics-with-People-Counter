@@ -1,9 +1,11 @@
 from random import randrange
+import time, schedule
 
 import numpy as np
 import pandas as pd
 import streamlit as st
 
+from mylib import config
 from mylib import Run
 from mylib import box
 
@@ -32,9 +34,27 @@ def first(mod):
     #table()
     if st.button('Specify URL and Click here'):
         if mod == 'Yolo' or 'yolo' or 'YOLO':
+            if config.Scheduler:
+                ##Runs for every 1 second
+                #schedule.every(1).seconds.do(run)
+                ##Runs at every day (9:00 am). You can change it.
+                schedule.every().day.at("9:00").do(box.run)
+
+                while 1:
+                    schedule.run_pending()
+            else:
                     box.run()
 
         elif mod == 'SSD' or 'Ssd' or 'ssd':
+            if config.Scheduler:
+                ##Runs for every 1 second
+                #schedule.every(1).seconds.do(run)
+                ##Runs at every day (9:00 am). You can change it.
+                schedule.every().day.at("9:00").do(Run.run)
+
+                while 1:
+                    schedule.run_pending()
+            else:
                     Run.run()
 
 
