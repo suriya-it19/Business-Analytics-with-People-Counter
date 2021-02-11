@@ -97,9 +97,6 @@ def run():
 
     writer = None
     totalFrames = 0
-    totalDown = 0
-    totalUp = 0
-    x = []
     empty=[]
     empty1=[]
     status = 'Tracking'
@@ -123,12 +120,15 @@ def run():
         frame = imutils.resize(frame, width = 700)
         rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
+        status = 'Detecting'
         if W is None or H is None:
             (H, W) = frame.shape[:2]
 
         blob = cv2.dnn.blobFromImage(frame, 0.007843, (W, H), 127.5)
         net.setInput(blob)
         detections = net.forward()
+
+        totalIn = 0
 
         for i in np.arange(0, detections.shape[2]):
             confidence = detections[0, 0, i, 2]
@@ -146,33 +146,27 @@ def run():
                 COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
                 label = "{}: {:.2f}%".format(CLASSES[idx], confidence * 100)
                 #print("[INFO] {}".format(label))
+                totalIn += 1
+                #count = count + totalIn
+                #if len(box):
+                #    x += totalIn
                 cv2.rectangle(frame, (startX, startY), (endX, endY),
                     COLORS[idx], 2)
                 y = startY - 15 if startY - 15 > 15 else startY + 15
                 cv2.putText(frame, label, (startX, y),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)               
 
-        cv2.line(frame, (0, H // 2), (W, H // 2), (0, 0, 0), 3)
-        cv2.putText(frame, "-Prediction border - Entrance-", (10, H - ((i * 20) + 200)),
-            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
+        #cv2.line(frame, (0, H // 2), (W, H // 2), (0, 0, 0), 3)
+        #cv2.putText(frame, "-Prediction border - Entrance-", (10, H - ((0 * 20) + 200)),
+        #    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
 
-        info = [
-        ("Exit", totalUp),
-        ("Enter", totalDown),
-        ("Status", status),
-        ]
+        text = "In: {}".format(totalIn)
+        cv2.putText(frame, text, (10, H - ((1 * 20) + 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
+        text = "Status: {}".format(status)
+        cv2.putText(frame, text, (10, H - ((2 * 20) + 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
 
-        info2 = [
-        ("Total people inside", x),
-        ]
-
-        for (i, (k, v)) in enumerate(info):
-            text = "{}: {}".format(k, v)
-            cv2.putText(frame, text, (10, H - ((i * 20) + 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
-
-        for (i, (k, v)) in enumerate(info2):
-            text = "{}: {}".format(k, v)
-            cv2.putText(frame, text, (265, H - ((i * 20) + 60)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+        #text = "Total people inside: {}".format(count)
+        #cv2.putText(frame, text, (400, H - ((1 * 20) + 90)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
         if config.Log:
             datetimee = [datetime.datetime.now()]
@@ -194,13 +188,33 @@ def run():
             z,b = randrange(7), randrange(7)
             date = '1/2021'
 
+            if totalIn > 5:
+                pro_price = price.predict([[year, month, week]]) + 5000
+            elif totalIn > 10:
+                pro_price = price.predict([[year, month, week]]) + 10000
+            else:
+                pro_price = price.predict([[year, month, week]]) - 5000
+
+
+            if totalIn > 5:
+                pro_plates = chettinad_mutton_plates.predict([[year, month, week]]) + 10
+            elif totalIn > 10:
+                pro_plates = chettinad_mutton_plates.predict([[year, month, week]]) + 30
+            else:
+                pro_plates = chettinad_mutton_plates.predict([[year, month, week]]) - 10
+
+            if chettinad_mutton_rating.predict([[year, month, week]]) == 1:
+                pro_rating = randrange(start=5, stop=10)
+            else:
+                pro_rating = randrange(start=0, stop=4)
+
             df = pd.DataFrame({
                 'Date': f'{date}',
                 'Week': f'{week}',
                 'Price': price.predict([[year, month, week]]),
-                f'{dish_sold[z]}' : chettinad_mutton_plates.predict([[year, month, week]]),
-                f'{dish_rating[b]}' : chettinad_mutton_rating.predict([[year, month, week]]),
-                f'{dish_price[z]}' : chettinad_mutton_price.predict([[year, month, week]])
+                f'{dish_sold[z]}' : pro_plates,
+                f'{dish_rating[b]}' : pro_rating,
+                f'{dish_price[z]}' : pro_price
             }, index=[0])
 
             st.table(df)#,width = 10000)
