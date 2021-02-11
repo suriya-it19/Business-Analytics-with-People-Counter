@@ -99,6 +99,10 @@ def run():
     totalFrames = 0
     totalDown = 0
     totalUp = 0
+    x = []
+    empty=[]
+    empty1=[]
+    status = 'Tracking'
 
     W = None
     H = None
@@ -151,6 +155,34 @@ def run():
         cv2.line(frame, (0, H // 2), (W, H // 2), (0, 0, 0), 3)
         cv2.putText(frame, "-Prediction border - Entrance-", (10, H - ((i * 20) + 200)),
             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
+
+        info = [
+        ("Exit", totalUp),
+        ("Enter", totalDown),
+        ("Status", status),
+        ]
+
+        info2 = [
+        ("Total people inside", x),
+        ]
+
+        for (i, (k, v)) in enumerate(info):
+            text = "{}: {}".format(k, v)
+            cv2.putText(frame, text, (10, H - ((i * 20) + 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
+
+        for (i, (k, v)) in enumerate(info2):
+            text = "{}: {}".format(k, v)
+            cv2.putText(frame, text, (265, H - ((i * 20) + 60)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+
+        if config.Log:
+            datetimee = [datetime.datetime.now()]
+            d = [datetimee, empty1, empty, x]
+            export_data = zip_longest(*d, fillvalue = '')
+
+            with open('Log.csv', 'w', newline='') as myfile:
+                wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
+                wr.writerow(("End Time", "In", "Out", "Total Inside"))
+                wr.writerows(export_data)
 
         image_placeholder.image(frame, channels="BGR")
         o += 1
