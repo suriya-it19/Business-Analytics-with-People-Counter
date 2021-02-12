@@ -23,10 +23,10 @@ from mylib.trackableobject import TrackableObject
 
 input_video = 'videos/Restaurant_Security_Cameras_system_Installation_CCTV_1.mp4'#config.url3
 
-cost_price_model_path = 'F:/TCS_Inframind/Restaurant/models/cost_price/'
-final_price_model_path = 'F:/TCS_Inframind/Restaurant/models/final_price/'
-final_rating_model_path = 'F:/TCS_Inframind/Restaurant/models/final_rating/'
-final_sold_model_path = 'F:/TCS_Inframind/Restaurant/models/final_sold/'
+cost_price_model_path = 'models/cost_price/'
+final_price_model_path = 'models/final_price/'
+final_rating_model_path = 'models/final_rating/'
+final_sold_model_path = 'models/final_sold/'
     
 price = joblib.load(cost_price_model_path + 'price.pkl')
 
