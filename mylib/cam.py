@@ -38,23 +38,23 @@ def first(mod):
                 ##Runs for every 1 second
                 #schedule.every(1).seconds.do(run)
                 ##Runs at every day (9:00 am). You can change it.
-                schedule.every().day.at("9:00").do(Run.run)
-
-                while 1:
-                    schedule.run_pending()
-            else:
-                    Run.run()
-
-        elif mod == 'SSD' or 'Ssd' or 'ssd':
-            if config.Scheduler:
-                ##Runs for every 1 second
-                #schedule.every(1).seconds.do(run)
-                ##Runs at every day (9:00 am). You can change it.
                 schedule.every().day.at("9:00").do(box.run)
 
                 while 1:
                     schedule.run_pending()
             else:
                     box.run()
+
+        elif mod == 'SSD' or 'Ssd' or 'ssd':
+            if config.Scheduler:
+                ##Runs for every 1 second
+                #schedule.every(1).seconds.do(run)
+                ##Runs at every day (9:00 am). You can change it.
+                schedule.every().day.at("9:00").do(Run.run)
+
+                while 1:
+                    schedule.run_pending()
+            else:
+                    Run.run()
 
 
