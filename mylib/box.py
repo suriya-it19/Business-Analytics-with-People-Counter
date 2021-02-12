@@ -99,6 +99,7 @@ def run():
     totalFrames = 0
     empty=[]
     empty1=[]
+    x=[]
     status = 'Tracking'
 
     W = None
