@@ -15,12 +15,13 @@ import schedule
 import streamlit as st
 from imutils.video import FPS, VideoStream
 
+from mylib.table import table
 from mylib import config, thread
 from mylib.centroidtracker import CentroidTracker
 from mylib.mailer import Mailer
 from mylib.trackableobject import TrackableObject
 
-input_video = 'videos/example_01.mp4'#config.url3
+input_video = 'videos/Restaurant_Security_Cameras_system_Installation_CCTV_1.mp4'#config.url3
 
 cost_price_model_path = 'F:/TCS_Inframind/Restaurant/models/cost_price/'
 final_price_model_path = 'F:/TCS_Inframind/Restaurant/models/final_price/'
@@ -182,43 +183,6 @@ def run():
         image_placeholder.image(frame, channels="BGR")
         o += 1
 
-        def table():
-            week = 1
-            month = randrange(3)
-            year = 5#randrange(5)
-            z,b = randrange(7), randrange(7)
-            date = '1/2021'
-
-            if totalIn > 5:
-                pro_price = price.predict([[year, month, week]]) + 5000
-            elif totalIn > 10:
-                pro_price = price.predict([[year, month, week]]) + 10000
-            else:
-                pro_price = price.predict([[year, month, week]]) - 5000
-
-
-            if totalIn > 5:
-                pro_plates = chettinad_mutton_plates.predict([[year, month, week]]) + 10
-            elif totalIn > 10:
-                pro_plates = chettinad_mutton_plates.predict([[year, month, week]]) + 30
-            else:
-                pro_plates = chettinad_mutton_plates.predict([[year, month, week]]) - 10
-
-            if chettinad_mutton_rating.predict([[year, month, week]]) == 1:
-                pro_rating = randrange(start=5, stop=10)
-            else:
-                pro_rating = randrange(start=0, stop=4)
-
-            df = pd.DataFrame({
-                'Date': f'{date}',
-                'Week': f'{week}',
-                'Price': price.predict([[year, month, week]]),
-                f'{dish_sold[z]}' : pro_plates,
-                f'{dish_rating[b]}' : pro_rating,
-                f'{dish_price[z]}' : pro_price
-            }, index=[0])
-
-            st.table(df)#,width = 10000)
             
         if o % 60 ==0:
-            table()
+            table(totalIn, price, chettinad_mutton_plates, chettinad_mutton_rating, dish_sold, dish_rating, dish_price)
