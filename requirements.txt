@@ -2,7 +2,7 @@ streamlit
 schedule
 numpy
 pandas
-random
+random2
 time
 csv
 datetime
