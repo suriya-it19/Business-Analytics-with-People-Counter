@@ -22,5 +22,8 @@ sklearn
 tensorflow
 keras
 matplotlib
+<<<<<<< HEAD
 texteditor
+=======
+>>>>>>> b742ea5de5124640b6ec9d14ddb9140066dc1590
 cmake
