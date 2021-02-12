@@ -18,7 +18,7 @@ sidebar_expander = st.sidebar.beta_expander("Model")
 with sidebar_expander:
    _, slider_col, _ = st.beta_columns([0.02, 0.96, 0.02])
    with slider_col:
-        mod = st.text_input('[INFO] Yolo or SSD')
+        mod = st.text_input('[INFO] Yolo')
 
 sidebar_expander = st.sidebar.beta_expander("Confidence Threshold")
 with sidebar_expander:
