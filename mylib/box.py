@@ -21,7 +21,7 @@ from mylib.centroidtracker import CentroidTracker
 from mylib.mailer import Mailer
 from mylib.trackableobject import TrackableObject
 
-input_video = 'videos/Restaurant_Security_Cameras_system_Installation_CCTV_1.mp4'#config.url3
+input_video = 'videos/edit.mp4'#config.url3
 
 cost_price_model_path = 'models/cost_price/'
 final_price_model_path = 'models/final_price/'

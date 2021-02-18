@@ -38,7 +38,7 @@ def first(mod):
                 ##Runs for every 1 second
                 #schedule.every(1).seconds.do(run)
                 ##Runs at every day (9:00 am). You can change it.
-                schedule.every().day.at("9:00").do(box.run)
+                schedule.every().week.at("9:00").do(box.run)
 
                 while 1:
                     schedule.run_pending()
@@ -50,7 +50,7 @@ def first(mod):
                 ##Runs for every 1 second
                 #schedule.every(1).seconds.do(run)
                 ##Runs at every day (9:00 am). You can change it.
-                schedule.every().day.at("9:00").do(Run.run)
+                schedule.every().week.at("9:00").do(Run.run)
 
                 while 1:
                     schedule.run_pending()
