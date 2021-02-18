@@ -163,9 +163,9 @@ def run():
         #    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
 
         text = "In: {}".format(totalIn)
-        cv2.putText(frame, text, (10, H - ((1 * 20) + 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
+        cv2.putText(frame, text, (10, H - ((1 * 20) + 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
         text = "Status: {}".format(status)
-        cv2.putText(frame, text, (10, H - ((2 * 20) + 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
+        cv2.putText(frame, text, (10, H - ((2 * 20) + 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
         #text = "Total people inside: {}".format(count)
         #cv2.putText(frame, text, (400, H - ((1 * 20) + 90)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
