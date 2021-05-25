@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 
-def first(mod):
+def first(mod, area):
     """
     # Trend Analysis using past data
     """

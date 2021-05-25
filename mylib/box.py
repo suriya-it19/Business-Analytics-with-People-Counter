@@ -21,7 +21,10 @@ from mylib.centroidtracker import CentroidTracker
 from mylib.mailer import Mailer
 from mylib.trackableobject import TrackableObject
 
-input_video = 'videos/edit.mp4'#config.url3
+input_videos = {'Dining':'videos/edit.mp4',
+                'Dining1': 'video1.mp4',
+                'Enterence': 'videos/example_01.mp4'
+            }#config.url3
 
 cost_price_model_path = 'models/cost_price/'
 final_price_model_path = 'models/final_price/'
@@ -60,9 +63,22 @@ dish_price = ['chettinad_mutton_price', 'chicken_curry_price', 'chicken_nuggets_
 dish_rating = ['chettinad_mutton_rating', 'chicken_curry_rating', 'chicken_nuggets_rating', 'dhal_makni_rating', 'mutton_chops_rating', 'paneer_tikka_rating', 'prawn_fry_rating', 'veg_manchurian_rating']
 dish_sold = ['chettinad_mutton_sold', 'chicken_curry_sold', 'chicken_nuggets_sold', 'dhal_makni_sold', 'mutton_chops_sold', 'paneer_tikka_sold', 'prawn_fry_sold', 'veg_manchurian_sold']
 
-def run():
+def run(area):
     o = 0
     t0 = time.time()
+
+    df = pd.DataFrame({
+                'Date': '0',
+                'Week': '0',
+                'Price': 0.0,
+                'dishes': ['chettinad_mutton', 'chicken_curry', 'chicken_nuggets', 'dhal_makni', 'mutton_chops', 'paneer_tikka', 'prawn_fry', 'veg_manchurian'],
+                'dish_sold' : [0,0,0,0,0,0,0,0],
+                'dish_rating' : [0,0,0,0,0,0,0,0],
+                'dish_price' : 0.0
+            }).set_index('Date')
+
+    bar1 = st.bar_chart(df[['dishes', 'dish_sold']].set_index('dishes'))
+    bar2 = st.bar_chart(df[['dishes', 'dish_rating']].set_index('dishes'))
 
     CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
         "bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
@@ -70,7 +86,17 @@ def run():
         "sofa", "train", "tvmonitor"]
 
     net = cv2.dnn.readNetFromCaffe(config.PROTOTXT, config.MODEL)
-    if not input_video:
+
+    with st.beta_container():
+        c1,c2,c3 = st.beta_columns(3)
+        with c1:
+            image_placeholder1 = st.empty()
+        with c2:
+            image_placeholder2 = st.empty()
+        with c3:
+            image_placeholder3 = st.empty()
+
+    if not input_videos:
         if config.url2:
             print("[INFO] Starting the live stream..")
             """
@@ -92,9 +118,9 @@ def run():
         [INFO] Starting the video..
         """
         #vs = VideoStream(input_video).start()        
-        vs = cv2.VideoCapture(input_video)
-
-    image_placeholder = st.empty()
+        vs = cv2.VideoCapture(input_videos[area])
+        vs1 = cv2.VideoCapture(input_videos['Dining1'])
+        vs2 = cv2.VideoCapture(input_videos['Enterence'])
 
     writer = None
     totalFrames = 0
@@ -113,7 +139,7 @@ def run():
 
     while True:
         frame = vs.read()
-        if input_video:
+        if input_videos[area]:
             frame = frame[1] if vs else frame
 
         if config.url1 or config.url2 is None and frame is None:
@@ -180,9 +206,19 @@ def run():
                 wr.writerow(("End Time", "In", "Out", "Total Inside"))
                 wr.writerows(export_data)
 
-        image_placeholder.image(frame, channels="BGR")
+        image_placeholder2.image(frame, channels="BGR")
+        
+        success, frame1 = vs1.read()
+        frame1 = imutils.resize(frame1, width = 700)
+        image_placeholder1.image(frame1)
+        
+        success, frame2 = vs2.read()
+        frame2 = imutils.resize(frame2, width = 700, height=300)
+        image_placeholder3.image(frame2)
         o += 1
 
             
-        if o % 60 ==0:
-            table(totalIn, price, chettinad_mutton_plates, chettinad_mutton_rating, dish_sold, dish_rating, dish_price)
+        if o % 20 ==0:
+            upTable = table(df, totalIn, price, chettinad_mutton_plates, chettinad_mutton_rating, dish_sold, dish_rating, dish_price)
+            bar1.add_rows(upTable[['dishes', 'dish_sold']].set_index('dishes'))
+            bar2.add_rows(upTable[['dishes', 'dish_rating']].set_index('dishes'))

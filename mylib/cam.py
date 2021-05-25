@@ -9,7 +9,7 @@ from mylib import config
 from mylib import Run
 from mylib import box
 
-def first(mod):
+def first(mod, area):
     """
     # Using People Counter and Machine learning
     """
@@ -43,7 +43,7 @@ def first(mod):
                 while 1:
                     schedule.run_pending()
             else:
-                    box.run()
+                    box.run(area)
 
         elif mod == 'SSD' or 'Ssd' or 'ssd':
             if config.Scheduler:
@@ -55,6 +55,6 @@ def first(mod):
                 while 1:
                     schedule.run_pending()
             else:
-                    Run.run()
+                    Run.run(area)
 
 

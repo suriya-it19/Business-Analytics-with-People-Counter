@@ -20,6 +20,13 @@ with sidebar_expander:
    with slider_col:
         mod = st.text_input('[INFO] SSD')
 
+sidebar_expander = st.sidebar.beta_expander("Area")
+with sidebar_expander:
+   _, slider_col, _ = st.beta_columns([0.02, 0.96, 0.02])
+   with slider_col:
+        area = st.selectbox('Which Area should be inspected?',
+                        ('Dining', 'Enterence', 'Dining1'))
+
 sidebar_expander = st.sidebar.beta_expander("Confidence Threshold")
 with sidebar_expander:
    _, slider_col, _ = st.beta_columns([0.02, 0.96, 0.02])
@@ -41,4 +48,4 @@ PAGES = {
 }
 selection = st.sidebar.radio("Go to", list(PAGES.keys()))
 page = PAGES[selection]
-page.first(mod)
+page.first(mod, area)
