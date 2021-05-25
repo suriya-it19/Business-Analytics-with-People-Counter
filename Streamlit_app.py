@@ -42,4 +42,3 @@ PAGES = {
 selection = st.sidebar.radio("Go to", list(PAGES.keys()))
 page = PAGES[selection]
 page.first(mod)
-
