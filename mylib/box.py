@@ -79,6 +79,7 @@ def run(area):
 
     bar1 = st.bar_chart(df[['dishes', 'dish_sold']].set_index('dishes'))
     bar2 = st.bar_chart(df[['dishes', 'dish_rating']].set_index('dishes'))
+    line = st.line_chart(df[['Week', 'dish_price']].set_index('week'))
 
     CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
         "bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
@@ -222,3 +223,4 @@ def run(area):
             upTable = table(df, totalIn, price, chettinad_mutton_plates, chettinad_mutton_rating, dish_sold, dish_rating, dish_price)
             bar1.add_rows(upTable[['dishes', 'dish_sold']].set_index('dishes'))
             bar2.add_rows(upTable[['dishes', 'dish_rating']].set_index('dishes'))
+            line.add_rows(upTable[['week', 'dish_price']].set_index('week'))

@@ -43,7 +43,4 @@ def table(df, totalIn, price, chettinad_mutton_plates, chettinad_mutton_rating, 
                 'dish_price' : pro_price[0]
             }).set_index('Date')
 
-            #df.update(df1, overwrite=True, errors="raise")
-
-            #return st.table(df)#,width = 10000)
             return df1
