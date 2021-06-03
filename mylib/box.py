@@ -22,7 +22,7 @@ from mylib.mailer import Mailer
 from mylib.trackableobject import TrackableObject
 
 input_videos = {'Dining':'videos/edit.mp4',
-                'Dining1': 'video1.mp4',
+                'Dining1': 'videos/IP_Dome_CCTV_Camera.mp4',
                 'Enterence': 'videos/example_01.mp4'
             }#config.url3
 
@@ -79,7 +79,7 @@ def run(area):
 
     bar1 = st.bar_chart(df[['dishes', 'dish_sold']].set_index('dishes'))
     bar2 = st.bar_chart(df[['dishes', 'dish_rating']].set_index('dishes'))
-    line = st.line_chart(df[['Week', 'dish_price']].set_index('week'))
+    line = st.line_chart(df[['Week', 'dish_price']].set_index('Week'))
 
     CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
         "bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
@@ -89,13 +89,18 @@ def run(area):
     net = cv2.dnn.readNetFromCaffe(config.PROTOTXT, config.MODEL)
 
     with st.beta_container():
-        c1,c2,c3 = st.beta_columns(3)
+        c1,c2 = st.beta_columns(2)
         with c1:
             image_placeholder1 = st.empty()
         with c2:
             image_placeholder2 = st.empty()
+
+    with st.beta_container():
+        c3,c4 = st.beta_columns(2)
         with c3:
             image_placeholder3 = st.empty()
+        with c4:
+            image_placeholder4 = st.empty()
 
     if not input_videos:
         if config.url2:
@@ -207,15 +212,15 @@ def run(area):
                 wr.writerow(("End Time", "In", "Out", "Total Inside"))
                 wr.writerows(export_data)
 
-        image_placeholder2.image(frame, channels="BGR")
+        image_placeholder1.image(frame, channels="BGR")
         
-        success, frame1 = vs1.read()
-        frame1 = imutils.resize(frame1, width = 700)
-        image_placeholder1.image(frame1)
+        image_placeholder2.image(frame)
         
-        success, frame2 = vs2.read()
-        frame2 = imutils.resize(frame2, width = 700, height=300)
-        image_placeholder3.image(frame2)
+        # success, frame2 = vs2.read()
+        # frame2 = imutils.resize(frame2, width = 700, height=200)
+        image_placeholder3.image(frame)
+        image_placeholder4.image(frame)
+
         o += 1
 
             
@@ -223,4 +228,4 @@ def run(area):
             upTable = table(df, totalIn, price, chettinad_mutton_plates, chettinad_mutton_rating, dish_sold, dish_rating, dish_price)
             bar1.add_rows(upTable[['dishes', 'dish_sold']].set_index('dishes'))
             bar2.add_rows(upTable[['dishes', 'dish_rating']].set_index('dishes'))
-            line.add_rows(upTable[['week', 'dish_price']].set_index('week'))
+            line.add_rows(upTable[['Week', 'dish_price']].set_index('Week'))
