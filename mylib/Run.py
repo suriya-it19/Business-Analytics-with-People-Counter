@@ -22,47 +22,81 @@ from mylib.trackableobject import TrackableObject
 
 input_video = config.url3
 
-cost_price_model_path = 'models/cost_price/'
-final_price_model_path = 'models/final_price/'
-final_rating_model_path = 'models/final_rating/'
-final_sold_model_path = 'models/final_sold/'
-    
-price = joblib.load(cost_price_model_path + 'price.pkl')
+cost_price_model_path = "models/cost_price/"
+final_price_model_path = "models/final_price/"
+final_rating_model_path = "models/final_rating/"
+final_sold_model_path = "models/final_sold/"
 
-chettinad_mutton_price = joblib.load(final_price_model_path + 'chettinad_mutton_price.pkl')
-chicken_curry_price = joblib.load(final_price_model_path + 'chicken_curry_price .pkl')
-chicken_nuggets_price = joblib.load(final_price_model_path + 'chicken_nuggets_price.pkl')
-dhal_makni_price = joblib.load(final_price_model_path + 'dhal_makni_price.pkl')
-mutton_chops_price = joblib.load(final_price_model_path + 'mutton_chops_price.pkl')
-paneer_tikka_price = joblib.load(final_price_model_path + 'paneer_tikka_price.pkl')
-prawn_fry_price = joblib.load(final_price_model_path + 'prawn_fry_price.pkl')
-veg_manchurian_price = joblib.load(final_price_model_path + 'veg_manchurian_price.pkl')
+price = joblib.load(cost_price_model_path + "price.pkl")
 
-chettinad_mutton_rating = joblib.load(final_rating_model_path + 'chettinad_mutton_rating.pkl')
-chicken_curry_rating = joblib.load(final_rating_model_path + 'chicken_curry_rating.pkl')
-chicken_nuggets_rating = joblib.load(final_rating_model_path + 'chicken_nuggets_rating.pkl')
-dhal_makni_rating = joblib.load(final_rating_model_path + 'dhal_makni_rating.pkl')
-mutton_chops_rating = joblib.load(final_rating_model_path + 'mutton_chops_rating.pkl')
-paneer_tikka_rating = joblib.load(final_rating_model_path + 'paneer_tikka_rating.pkl')
-prawn_fry_rating = joblib.load(final_rating_model_path + 'prawn_fry_rating.pkl')
-veg_manchurian_rating = joblib.load(final_rating_model_path + 'veg_manchurian_rating.pkl')
+chettinad_mutton_price = joblib.load(
+    final_price_model_path + "chettinad_mutton_price.pkl"
+)
+chicken_curry_price = joblib.load(final_price_model_path + "chicken_curry_price .pkl")
+chicken_nuggets_price = joblib.load(
+    final_price_model_path + "chicken_nuggets_price.pkl"
+)
+dhal_makni_price = joblib.load(final_price_model_path + "dhal_makni_price.pkl")
+mutton_chops_price = joblib.load(final_price_model_path + "mutton_chops_price.pkl")
+paneer_tikka_price = joblib.load(final_price_model_path + "paneer_tikka_price.pkl")
+prawn_fry_price = joblib.load(final_price_model_path + "prawn_fry_price.pkl")
+veg_manchurian_price = joblib.load(final_price_model_path + "veg_manchurian_price.pkl")
 
-chettinad_mutton_plates = joblib.load(final_sold_model_path + 'chettinad_mutton_plates.pkl')
-chicken_curry_plates = joblib.load(final_sold_model_path + 'chicken_curry_plates.pkl')
-chicken_nuggets_plates = joblib.load(final_sold_model_path + 'chicken_nuggets_plates.pkl')
-dhal_makni_plates = joblib.load(final_sold_model_path + 'dhal_makni_plates.pkl')
-mutton_chops_plates = joblib.load(final_sold_model_path + 'mutton_chops_plates.pkl')
-paneer_tikka_plates = joblib.load(final_sold_model_path + 'paneer_tikka_plates.pkl')
-prawn_fry_plates = joblib.load(final_sold_model_path + 'prawn_fry_plates.pkl')
-veg_manchurian_plates = joblib.load(final_sold_model_path + 'veg_manchurian_plates.pkl')
+chettinad_mutton_rating = joblib.load(
+    final_rating_model_path + "chettinad_mutton_rating.pkl"
+)
+chicken_curry_rating = joblib.load(final_rating_model_path + "chicken_curry_rating.pkl")
+chicken_nuggets_rating = joblib.load(
+    final_rating_model_path + "chicken_nuggets_rating.pkl"
+)
+dhal_makni_rating = joblib.load(final_rating_model_path + "dhal_makni_rating.pkl")
+mutton_chops_rating = joblib.load(final_rating_model_path + "mutton_chops_rating.pkl")
+paneer_tikka_rating = joblib.load(final_rating_model_path + "paneer_tikka_rating.pkl")
+prawn_fry_rating = joblib.load(final_rating_model_path + "prawn_fry_rating.pkl")
+veg_manchurian_rating = joblib.load(
+    final_rating_model_path + "veg_manchurian_rating.pkl"
+)
+
+chettinad_mutton_plates = joblib.load(
+    final_sold_model_path + "chettinad_mutton_plates.pkl"
+)
+chicken_curry_plates = joblib.load(final_sold_model_path + "chicken_curry_plates.pkl")
+chicken_nuggets_plates = joblib.load(
+    final_sold_model_path + "chicken_nuggets_plates.pkl"
+)
+dhal_makni_plates = joblib.load(final_sold_model_path + "dhal_makni_plates.pkl")
+mutton_chops_plates = joblib.load(final_sold_model_path + "mutton_chops_plates.pkl")
+paneer_tikka_plates = joblib.load(final_sold_model_path + "paneer_tikka_plates.pkl")
+prawn_fry_plates = joblib.load(final_sold_model_path + "prawn_fry_plates.pkl")
+veg_manchurian_plates = joblib.load(final_sold_model_path + "veg_manchurian_plates.pkl")
+
 
 def run():
     t0 = time.time()
 
-    CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
-        "bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
-        "dog", "horse", "motorbike", "person", "pottedplant", "sheep",
-        "sofa", "train", "tvmonitor"]
+    CLASSES = [
+        "background",
+        "aeroplane",
+        "bicycle",
+        "bird",
+        "boat",
+        "bottle",
+        "bus",
+        "car",
+        "cat",
+        "chair",
+        "cow",
+        "diningtable",
+        "dog",
+        "horse",
+        "motorbike",
+        "person",
+        "pottedplant",
+        "sheep",
+        "sofa",
+        "train",
+        "tvmonitor",
+    ]
 
     net = cv2.dnn.readNetFromCaffe(config.PROTOTXT, config.MODEL)
 
@@ -104,8 +138,8 @@ def run():
     totalDown = 0
     totalUp = 0
     x = []
-    empty=[]
-    empty1=[]
+    empty = []
+    empty1 = []
 
     fps = FPS().start()
 
@@ -120,7 +154,7 @@ def run():
         if config.url is None and frame is None:
             break
 
-        frame = imutils.resize(frame, width = 500)
+        frame = imutils.resize(frame, width=500)
         rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         if W is None or H is None:
@@ -170,8 +204,15 @@ def run():
                 rects.append((startX, startY, endX, endY))
 
         cv2.line(frame, (0, H // 2), (W, H // 2), (0, 0, 0), 3)
-        cv2.putText(frame, "-Prediction border - Entrance-", (10, H - ((i * 20) + 200)),
-            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
+        cv2.putText(
+            frame,
+            "-Prediction border - Entrance-",
+            (10, H - ((i * 20) + 200)),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.5,
+            (0, 0, 0),
+            1,
+        )
 
         objects = ct.update(rects)
 
@@ -196,10 +237,17 @@ def run():
                         totalDown += 1
                         empty1.append(totalDown)
                         x = []
-                        x.append(len(empty1)-len(empty))
+                        x.append(len(empty1) - len(empty))
                         if sum(x) >= config.Threshold:
-                            cv2.putText(frame, "-ALERT: People limit exceeded-", (10, frame.shape[0] - 80),
-                                cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 255), 2)
+                            cv2.putText(
+                                frame,
+                                "-ALERT: People limit exceeded-",
+                                (10, frame.shape[0] - 80),
+                                cv2.FONT_HERSHEY_COMPLEX,
+                                0.5,
+                                (0, 0, 255),
+                                2,
+                            )
                             if config.ALERT:
                                 print("[INFO] Sending email alert..")
                                 Mailer().send(config.MAIL)
@@ -207,38 +255,60 @@ def run():
 
                         to.counted = True
 
-
             trackableObjects[objectID] = to
 
             text = "ID {}".format(objectID)
-            cv2.putText(frame, text, (centroid[0] - 10, centroid[1] - 10),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+            cv2.putText(
+                frame,
+                text,
+                (centroid[0] - 10, centroid[1] - 10),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.5,
+                (255, 255, 255),
+                2,
+            )
             cv2.circle(frame, (centroid[0], centroid[1]), 4, (255, 255, 255), -1)
 
         info = [
-        ("Exit", totalUp),
-        ("Enter", totalDown),
-        ("Status", status),
+            ("Exit", totalUp),
+            ("Enter", totalDown),
+            ("Status", status),
         ]
 
         info2 = [
-        ("Total people inside", x),
+            ("Total people inside", x),
         ]
 
         for (i, (k, v)) in enumerate(info):
             text = "{}: {}".format(k, v)
-            cv2.putText(frame, text, (10, H - ((i * 20) + 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
+            cv2.putText(
+                frame,
+                text,
+                (10, H - ((i * 20) + 20)),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.6,
+                (0, 0, 0),
+                2,
+            )
 
         for (i, (k, v)) in enumerate(info2):
             text = "{}: {}".format(k, v)
-            cv2.putText(frame, text, (265, H - ((i * 20) + 60)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+            cv2.putText(
+                frame,
+                text,
+                (265, H - ((i * 20) + 60)),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.6,
+                (255, 255, 255),
+                2,
+            )
 
         if config.Log:
             datetimee = [datetime.datetime.now()]
             d = [datetimee, empty1, empty, x]
-            export_data = zip_longest(*d, fillvalue = '')
+            export_data = zip_longest(*d, fillvalue="")
 
-            with open('Log.csv', 'w', newline='') as myfile:
+            with open("Log.csv", "w", newline="") as myfile:
                 wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
                 wr.writerow(("End Time", "In", "Out", "Total Inside"))
                 wr.writerows(export_data)
@@ -249,18 +319,27 @@ def run():
             week = 1
             month = 1
             year = randrange(5)
-            date = f'{month}/2021'
+            date = f"{month}/2021"
 
-            df = pd.DataFrame({
-                'Date': f'{date}',
-                'Week': f'{week}',
-                'Price': price.predict([[year, month, week]]),
-                'chettinad_mutton_plates' : chettinad_mutton_plates.predict([[year, month, week]]),
-                'chettinad_mutton_rating' : chettinad_mutton_rating.predict([[year, month, week]]),
-                'chettinad_mutton_price' : chettinad_mutton_price.predict([[year, month, week]]),
-                'Discount value' : 'prediction'
-            }, index=[0])
+            df = pd.DataFrame(
+                {
+                    "Date": f"{date}",
+                    "Week": f"{week}",
+                    "Price": price.predict([[year, month, week]]),
+                    "chettinad_mutton_plates": chettinad_mutton_plates.predict(
+                        [[year, month, week]]
+                    ),
+                    "chettinad_mutton_rating": chettinad_mutton_rating.predict(
+                        [[year, month, week]]
+                    ),
+                    "chettinad_mutton_price": chettinad_mutton_price.predict(
+                        [[year, month, week]]
+                    ),
+                    "Discount value": "prediction",
+                },
+                index=[0],
+            )
 
-            st.table(df)#,width = 10000)
+            st.table(df)  # ,width = 10000)
 
         table()
