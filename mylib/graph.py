@@ -77,12 +77,12 @@ def first(mod, area):
 
     main()
 
-    chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
+    # chart_data = pd.DataFrame(np.random.randn(20, 3), columns=["a", "b", "c"])
 
-    st.line_chart(chart_data)
+    # st.line_chart(chart_data)
 
-    map_data = pd.DataFrame(
-        np.random.randn(200, 2) / [100, 50] + [9.9252, 78.1198], columns=["lat", "lon"]
-    )
+    # map_data = pd.DataFrame(
+    #     np.random.randn(200, 2) / [100, 50] + [9.9252, 78.1198], columns=["lat", "lon"]
+    # )
 
-    st.map(map_data)
+    # st.map(map_data)

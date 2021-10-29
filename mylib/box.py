@@ -161,15 +161,15 @@ def run(area):
 
     net = cv2.dnn.readNetFromCaffe(config.PROTOTXT, config.MODEL)
 
-    with st.beta_container():
-        c1, c2 = st.beta_columns(2)
+    with st.container():
+        c1, c2 = st.columns(2)
         with c1:
             image_placeholder1 = st.empty()
         with c2:
             image_placeholder2 = st.empty()
 
-    with st.beta_container():
-        c3, c4 = st.beta_columns(2)
+    with st.container():
+        c3, c4 = st.columns(2)
         with c3:
             image_placeholder3 = st.empty()
         with c4:

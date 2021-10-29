@@ -5,7 +5,7 @@ from mylib import cam
 from mylib import graph
 from mylib import config
 
-st.set_page_config(layout="wide")
+# st.set_page_config(layout="wide")
 
 st.title("Enterprice AI")
 """
@@ -14,29 +14,29 @@ st.title("Enterprice AI")
 
 st.sidebar.title("Tools")
 
-sidebar_expander = st.sidebar.beta_expander("Model")
+sidebar_expander = st.sidebar.expander("Model")
 with sidebar_expander:
-    _, slider_col, _ = st.beta_columns([0.02, 0.96, 0.02])
+    _, slider_col, _ = st.columns([0.02, 0.96, 0.02])
     with slider_col:
         mod = st.text_input("[INFO] SSD")
 
-sidebar_expander = st.sidebar.beta_expander("Area")
+sidebar_expander = st.sidebar.expander("Area")
 with sidebar_expander:
-    _, slider_col, _ = st.beta_columns([0.02, 0.96, 0.02])
+    _, slider_col, _ = st.columns([0.02, 0.96, 0.02])
     with slider_col:
         area = st.selectbox(
             "Which Area should be inspected?", ("Dining", "Enterence", "Dining1")
         )
 
-sidebar_expander = st.sidebar.beta_expander("Confidence Threshold")
+sidebar_expander = st.sidebar.expander("Confidence Threshold")
 with sidebar_expander:
-    _, slider_col, _ = st.beta_columns([0.02, 0.96, 0.02])
+    _, slider_col, _ = st.columns([0.02, 0.96, 0.02])
     with slider_col:
         conf = st.slider("[INFO] Default - 0.4", 0.0, 1.0, value=0.4)
 
-sidebar_expander1 = st.sidebar.beta_expander("Webcam Url")
+sidebar_expander1 = st.sidebar.expander("Webcam Url")
 with sidebar_expander1:
-    _, slider_col1, _ = st.beta_columns([0.02, 0.96, 0.02])
+    _, slider_col1, _ = st.columns([0.02, 0.96, 0.02])
     with slider_col1:
         id1 = st.number_input("[INFO] 0 for webcam", step=0, min_value=0, max_value=2)
         id2 = st.text_input("[INFO] IP Link")
