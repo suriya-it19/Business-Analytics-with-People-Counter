@@ -23,4 +23,5 @@ tensorflow
 keras
 matplotlib
 texteditor
-cmake
+# cmake
+dlib
