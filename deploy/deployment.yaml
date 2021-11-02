@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: businesscv-deployment
+  labels:
+    app: businesscv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: businesscv
+  template:
+    metadata:
+      name: businesscv-deployment
+      labels:
+        app: businesscv
+    spec:
+      containers:
+        - name: firstproject
+          image: "icr.io/firstproject/businesscv@sha256:4f15cf5d700ca336076d5caa1645f2b7fe65a466dda25a77f516bdeafa7e73da"
+          ports:
+            - containerPort: 5051
+          resources:
+            limits:
+              cpu: 0.3
+              memory: 512M
+          env:
+            - name: DEBUG_MODE
+              value: "1"
+      imagePullSecrets:
+        - name: default-icr-io
+
