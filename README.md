@@ -17,10 +17,26 @@
 - Streamlit
 - Tableau
 
+# Deployment
+- Docker
+- IBM Container Registry - to store the docker image
+- IBM Kubernetes - to deploy the docker image in a container with scaled environments 
+
 # Usage
-## Install
- Install all dependencies using 'pip install -r requirements.txt'
- Except dlib, use 'conda install -c conda-forge dlib'
+
+## To run locally
+Install
+Install all dependencies using the command ```pip install -r requirements.txt```; 
+Except for dlib, use the command ```conda install -c conda-forge dlib```; 
  
-## Run
- Finally, Run using the command 'streamlit run Streamlit-app.py'
+Run
+Finally, Run using the command ```streamlit run Streamlit-app.py```
+
+## From Docker
+Pull the image from the docker hub
+```docker pull businesscv:latest```; 
+Run it with a local container
+```docker run -t businesscv:latest```
+
+## From endpoints
+ The docker image has been deployed in the IBM cloud using kubernetes, access the application directly from [here](http://159.122.186.127:32733/)
