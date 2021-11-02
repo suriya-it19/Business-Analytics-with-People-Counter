@@ -18,7 +18,7 @@ sidebar_expander = st.sidebar.expander("Model")
 with sidebar_expander:
     _, slider_col, _ = st.columns([0.02, 0.96, 0.02])
     with slider_col:
-        mod = st.text_input("[INFO] SSD", key="modelssd")
+        mod = st.text_input("[INFO] SSD", key="model-ssd")
 
 sidebar_expander = st.sidebar.expander("Area")
 with sidebar_expander:
@@ -39,8 +39,8 @@ with sidebar_expander1:
     _, slider_col1, _ = st.columns([0.02, 0.96, 0.02])
     with slider_col1:
         id1 = st.number_input("[INFO] 0 for webcam", step=0, min_value=0, max_value=2)
-        id2 = st.text_input("[INFO] IP Link", key="ip link")
-        id3 = st.text_input("[INFO] Video path", key="video_path")
+        id2 = st.text_input("[INFO] IP Link", key="ip-link")
+        id3 = st.text_input("[INFO] Video path", key="video-path")
 
 st.sidebar.title("Navigation")
 PAGES = {"Trend Analysis": graph, "People Counting": cam}
