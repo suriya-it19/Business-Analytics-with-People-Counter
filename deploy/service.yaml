@@ -9,5 +9,8 @@ spec:
     app: businesscv
   type: NodePort
   ports:
-   - port: 5051
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 8501
      # nodePort: <31514>
