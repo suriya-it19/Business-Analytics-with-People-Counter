@@ -15,6 +15,11 @@ import schedule
 import streamlit as st
 from imutils.video import FPS, VideoStream
 
+from mylib.api import credentials, space_id
+from ibm_watson_machine_learning import APIClient
+client = APIClient(credentials)
+client.set.default_space(space_id)
+
 from mylib.table import table
 from mylib import config, thread
 from mylib.centroidtracker import CentroidTracker
@@ -26,6 +31,7 @@ input_videos = {
     "Dining1": "videos/IP_Dome_CCTV_Camera.mp4",
     "Enterence": "videos/example_01.mp4",
 }  # config.url3
+
 
 cost_price_model_path = "models/cost_price/"
 final_price_model_path = "models/final_price/"

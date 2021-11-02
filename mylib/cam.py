@@ -8,6 +8,8 @@ import streamlit as st
 from mylib import config
 from mylib import Run
 from mylib import box
+from mylib.box import client
+from mylib.predict import predict
 
 
 def first(mod, area):
@@ -25,15 +27,29 @@ def first(mod, area):
             {
                 "Date": f"{date}",
                 "Week": f"{week}",
-                "Price": box.price.predict([[year, month, week]]),
-                "chettinad_mutton_plates": box.chettinad_mutton_plates.predict(
-                    [[year, month, week]]
+                "Price": predict(
+                    client,
+                    "total_price",
+                    ["year", "month", "week"],
+                    [year, month, week],
                 ),
-                "chettinad_mutton_rating": box.chettinad_mutton_rating.predict(
-                    [[year, month, week]]
+                "chettinad_mutton_plates": predict(
+                    client,
+                    "chettinad_mutton_plates_sold",
+                    ["year", "month", "week"],
+                    [year, month, week],
                 ),
-                "chettinad_mutton_price": box.chettinad_mutton_price.predict(
-                    [[year, month, week]]
+                "chettinad_mutton_rating": predict(
+                    client,
+                    "chettinad_mutton",
+                    ["year", "month", "week"],
+                    [year, month, week],
+                ),
+                "chettinad_mutton_price": predict(
+                    client,
+                    "chettinad_mutton_price_price",
+                    ["year", "month", "week"],
+                    [year, month, week],
                 ),
                 "Discount value": "prediction",
             },

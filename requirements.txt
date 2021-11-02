@@ -25,3 +25,5 @@ matplotlib
 texteditor
 # cmake
 dlib
+
+ibm-watson-machine-learning

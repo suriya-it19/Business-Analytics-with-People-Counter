@@ -15,10 +15,13 @@ import schedule
 import streamlit as st
 from imutils.video import FPS, VideoStream
 
-from mylib import config, thread
+from mylib.box import client
+from mylib import config, thread, api, predict
 from mylib.centroidtracker import CentroidTracker
 from mylib.mailer import Mailer
 from mylib.trackableobject import TrackableObject
+from ibm_watson_machine_learning import APIClient
+client = APIClient(api.credentials)
 
 input_video = config.url3
 
@@ -325,16 +328,10 @@ def run():
                 {
                     "Date": f"{date}",
                     "Week": f"{week}",
-                    "Price": price.predict([[year, month, week]]),
-                    "chettinad_mutton_plates": chettinad_mutton_plates.predict(
-                        [[year, month, week]]
-                    ),
-                    "chettinad_mutton_rating": chettinad_mutton_rating.predict(
-                        [[year, month, week]]
-                    ),
-                    "chettinad_mutton_price": chettinad_mutton_price.predict(
-                        [[year, month, week]]
-                    ),
+                    "Price": predict(client, "total_price", ["year", "month", "week"], [year, month, week]),
+                    "chettinad_mutton_plates": predict(client, "chettinad_mutton_plates_sold", ["year", "month", "week"], [year, month, week]),
+                    "chettinad_mutton_rating": predict(client, "chettinad_mutton", ["year", "month", "week"], [year, month, week]),
+                    "chettinad_mutton_price": predict(client, "chettinad_mutton_price_price", ["year", "month", "week"], [year, month, week]),
                     "Discount value": "prediction",
                 },
                 index=[0],
