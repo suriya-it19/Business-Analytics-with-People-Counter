@@ -240,7 +240,7 @@ def run(area):
         for i in np.arange(0, detections.shape[2]):
             confidence = detections[0, 0, i, 2]
 
-            if confidence > config.Confidence:
+            if confidence > config.confidence:
                 idx = int(detections[0, 0, i, 1])
 
                 if CLASSES[idx] != "person":
